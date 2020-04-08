@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Question from './components/Question';
 import Form from './components/Form';
-
+import Expenses from './components/Expenses'
 function App() {
   const [budget, setBudget] = useState(0);
   const [balance, setBalance] = useState(0);
@@ -28,7 +28,9 @@ function App() {
               <div className='one-half column'>
                 <Form addNewExpense={addNewExpense}></Form>
               </div>
-              <div className='one-half column'>2</div>
+              <div className='one-half column'>
+                <Expenses expenses={expenses}></Expenses>
+              </div>
             </div>
           )}
         </div>
