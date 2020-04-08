@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Error from './Error';
 import shortId from 'shortid';
+import PropTypes from 'prop-types';
 
-const Form = ({ addNewExpense }) => {
+const Form = ({ setExpense, setCreateExpense }) => {
   const [expenseName, setExpenseName] = useState('');
   const [expenseAmount, setExpenseAmount] = useState(0);
   const [error, setError] = useState(false);
+  
   const addExpense = (e) => {
     e.preventDefault();
     if (
@@ -23,7 +25,8 @@ const Form = ({ addNewExpense }) => {
       expenseAmount,
       id: shortId.generate(),
     };
-    addNewExpense(expense);
+    setExpense(expense);
+    setCreateExpense(true);
     setExpenseName('');
     setExpenseAmount(0);
   };
@@ -31,7 +34,7 @@ const Form = ({ addNewExpense }) => {
   return (
     <form onSubmit={addExpense}>
       <h2>Enter your expenses</h2>
-      {error ? <Error message='Incorrect expense'></Error> : null}
+      {error ? <Error message='Invalid expense'></Error> : null}
 
       <div className='campo'>
         <label>Expense name</label>
@@ -62,5 +65,10 @@ const Form = ({ addNewExpense }) => {
       ></input>
     </form>
   );
+};
+
+Form.propTypes = {
+  setExpense: PropTypes.func.isRequired,
+  setCreateExpense: PropTypes.func.isRequired,
 };
 export default Form;
