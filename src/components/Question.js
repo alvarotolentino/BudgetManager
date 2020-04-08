@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Error from './Error';
 
-const Question = ({ setBudget, setBalance }) => {
+const Question = ({ setBudget, setBalance, setShowQuestion }) => {
   const [quantity, setQuantity] = useState(0);
   const [error, setError] = useState(false);
-  const defineBudget = e => {
+  const updateQuantity = e => {
     setQuantity(parseInt(e.target.value, 10));
   };
 
@@ -17,6 +17,7 @@ const Question = ({ setBudget, setBalance }) => {
     setError(false);
     setBudget(quantity);
     setBalance(quantity);
+    setShowQuestion(false)
   };
 
   return (
@@ -28,7 +29,7 @@ const Question = ({ setBudget, setBalance }) => {
           type='number'
           className='u-full-width'
           placeholder='Enter your budget'
-          onChange={defineBudget}
+          onChange={updateQuantity}
         ></input>
         <input
           type='submit'
